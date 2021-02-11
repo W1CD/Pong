@@ -9,8 +9,14 @@ import UIKit
 import SpriteKit
 import GameplayKit
 
+var currentGameType = gameType.medium
+
 class GameViewController: UIViewController {
 
+    @IBAction func Pause(_ sender: Any) {
+        pause()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -19,6 +25,8 @@ class GameViewController: UIViewController {
             if let scene = SKScene(fileNamed: "GameScene") {
                 // Set the scale mode to scale to fit the window
                 scene.scaleMode = .aspectFill
+                
+                scene.size = view.bounds.size
                 
                 // Present the scene
                 view.presentScene(scene)
@@ -46,4 +54,12 @@ class GameViewController: UIViewController {
     override var prefersStatusBarHidden: Bool {
         return true
     }
+    
+    func pause(){
+        let MenuVC = self.storyboard?.instantiateViewController(withIdentifier: "MenuVC") as! MenuVC
+        
+        self.navigationController?.pushViewController(MenuVC, animated: true)
+        
+    }
+    
 }
